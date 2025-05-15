@@ -1,6 +1,10 @@
 package my.androidbasics.ui.photos
 
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.layout.ContentScale
+import coil.compose.rememberAsyncImagePainter
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
@@ -24,12 +28,26 @@ fun PhotoList(
 
 @Composable
 private fun PhotoItem(photo: MarsPhoto) {
-    Card(modifier = Modifier
-        .padding(horizontal = 16.dp, vertical = 8.dp)
+    Card(
+        shape = RoundedCornerShape(8.dp),
+        modifier = Modifier
+            .padding(horizontal = 16.dp, vertical = 8.dp)
+            .fillMaxWidth()
     ) {
-        Text(
-            text = "ID: ${photo.id}",
-            modifier = Modifier.padding(16.dp)
-        )
+        Column {
+            Image(
+                painter = rememberAsyncImagePainter(photo.imgSrcUrl),
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(200.dp)
+            )
+            Spacer(Modifier.height(8.dp))
+            Text(
+                text = "ID: ${photo.id}",
+                modifier = Modifier.padding(16.dp)
+            )
+        }
     }
 }
