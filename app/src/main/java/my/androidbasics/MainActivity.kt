@@ -11,43 +11,28 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import my.androidbasics.ui.photos.PhotoList
-import my.androidbasics.ui.photos.PhotosViewModel
+import my.androidbasics.ui.amphibians.AmphibianList
+import my.androidbasics.ui.amphibians.AmphibiansViewModel
+
 import androidx.compose.ui.tooling.preview.Preview
 import my.androidbasics.ui.theme.AndroidBasicsTheme
 
 class MainActivity : ComponentActivity() {
 
-    private val viewModel: PhotosViewModel by viewModels()
+    private val viewModel: AmphibiansViewModel  by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             AndroidBasicsTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    PhotoList(
-                        photos = viewModel.photos.value,
-                        modifier = Modifier.padding(innerPadding)
+                Scaffold(modifier = Modifier.fillMaxSize()) { padding  ->
+                    AmphibianList(
+                        items  = viewModel.amphibians.value,
+                        modifier = Modifier.padding(padding)
                     )
                 }
             }
-        }
-    }
-
-    @Composable
-    fun Greeting(name: String, modifier: Modifier = Modifier) {
-        Text(
-            text = "Hello $name!",
-            modifier = modifier
-        )
-    }
-
-    @Preview(showBackground = true)
-    @Composable
-    fun GreetingPreview() {
-        AndroidBasicsTheme {
-            Greeting("Android")
         }
     }
 }
